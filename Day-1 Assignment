@@ -1,0 +1,52 @@
+## 
+Use official shell script to install and configure Docker on your control machine.::
+
+wget -qO- https://get.docker.com/ | sh
+
+
+## Start Docker service and check status of the same.:
+
+sudo service docker start
+
+logs :
+
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2018-04-02 19:57:47 IST; 1min 58s ago
+
+## Display Docker version.:
+
+sudo docker version
+
+logs :
+
+Client:
+ Version:	18.03.0-ce
+ API version:	1.37
+ Go version:	go1.9.4
+ Git commit:	0520e24
+ Built:	Wed Mar 21 23:10:01 2018
+ OS/Arch:	linux/amd64
+ Experimental:	false
+ Orchestrator:	swarm
+
+Server:
+ Engine:
+  Version:	18.03.0-ce
+  API version:	1.37 (minimum version 1.12)
+  Go version:	go1.9.4
+  Git commit:	0520e24
+  Built:	Wed Mar 21 23:08:31 2018
+  OS/Arch:	linux/amd64
+  Experimental:	false
+  
+  
+  
+## Display System information using Docker.:
+
+  sudo docker info
+  
+  
+
+
+
