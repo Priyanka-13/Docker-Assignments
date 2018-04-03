@@ -53,7 +53,10 @@ Executing /lib/systemd/systemd-sysv-install enable docker
 
   sudo docker info
   
-  
+## To remove all the containers :
+
+sudo docker rm -f $(sudo docker ps -aq)
+(-f will remove all the container including the active one)
 
 
 
