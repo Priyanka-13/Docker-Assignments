@@ -1,0 +1,62 @@
+  **********Assignment 1***********
+
+
+## Run a docker container from "hello-world" image.::
+
+sudo docker run hello-world
+
+## Pull "alpine" image from docker registry and see if image is available in your local image list.:
+  
+  (pulling alpine image) :
+  
+  sudo docker pull alpine 
+Logs :
+Using default tag: latest
+latest: Pulling from library/alpine
+Digest: sha256:7df6db5aa61ae9480f52f0b3a06a140ab98d427f86d8d5de0bedab9b8df6b1c0
+Status: Image is up to date for alpine:latest
+
+  (checking image lists in local repo) :
+  
+  sudo docker image list 
+
+  LOGS :
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx               latest              7f70b30f2cc6        12 days ago         109MB
+ubuntu              latest              f975c5035748        3 weeks ago         112MB
+alpine              latest              3fd9065eaf02        2 months ago        4.15MB
+hello-world         latest              f2a91732366c        4 months ago        1.85kB
+
+  ## Pull some specific version of docker "alpine" image from docker registry.:
+  
+     sudo docker pull alpine:3.5
+     
+     
+## Run a docker container from local image "alpine" and run an inline command "ls -l" while running container.:
+     
+     sudo docker run -it alpine ls -l
+     
+## Try to take login to container created using "alpine" image.:     
+     
+     sudo docker run -d  --name priyanka-alpine3 alpine tail -f /dev/null
+     sudo docker exec -it [container ID] /bin/sh
+
+## Detach yourself from the container without making it exit/container kill.::
+
+    sudo docker run -it alpine /bin/sh  (this will provide the shell of alpine container)
+    now press ctrl p+q     (it will detach us from container without exiting it)
+
+## Stop running container.Start container that was stopped earlier.
+    
+    sudo docker stop [Container ID]
+    sudo docker start [Container ID] - it wont go into exited status coz there is a deamon running in this container
+
+##  Try to remove "alpine" image from your local system.
+
+    sudo docker rmi [image id]
+
+
+
+  
+  
