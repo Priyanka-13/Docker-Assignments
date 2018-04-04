@@ -1,2 +1,103 @@
+** Tasks **
 
-# TASKS
+## Pull nginx image from dockerhub.::
+  command :
+    
+sudo docker pull nginx
+    
+  Logs :
+    
+Using default tag: latest 
+latest: Pulling from library/nginx
+Digest: sha256:d0468eaec1ef818af05f85ac00e484fd5a2ae75dd567dc9f7ccf5f68a60351fb
+Status: Image is up to date for nginx:latest
+
+## Run a container from nginx image and map container port 80 to system port 80.:
+  Command :
+  
+sudo docker run -d -it --name ninja-nginx -p 80:80 nginx
+
+  logs :
+  
+  docker: Error response from daemon: driver failed programming external connectivity on endpoint ninja-nginx 
+  (ecabec2a9c46c9edf82befff7307e202199fd9e91753ffa9b14cbb37e02ef9bc): 
+  Error starting userland proxy: listen tcp 0.0.0.0:80: bind: address already in use.
+  
+## Display all mapped ports on nginx image.::
+  Command :
+  
+ sudo docker ps -a
+
+  Logs :
+  
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES
+28d0a7c1d2fe        nginx               "nginx -g 'daemon of…"   3 seconds ago       Up 1 second         0.0.0.0:90->80/tcp   ninja-nginx
+
+
+## Run a docker container named "containexpose" from nginx image and expose port 80 of container 
+   to outer world without mapping it to any of system port.:
+   
+   Command :
+   sudo docker run -d  -it --name containexpose --expose=80 nginx 
+  
+  Now run the command docker inspect and find the IP of the container and hit this IP from browser and nginx page would be accessible directly now.
+  
+## Create docker volume named "dbvol" :
+
+   Command :
+   sudo docker volume create my-vol
+   
+## Run docker container from wordpress image and mount "dbvol" to /var/lib/mysql ::
+  
+  Command :
+  sudo docker run -d --name volume-new1 -v /var/lib/docker/volumes/my-vol://var/lib/mysql wordpress 
+
+## Display all docker volumes.:
+
+  Command  :
+  sudo docker volume ls
+  
+  Logs :
+
+DRIVER              VOLUME NAME
+local               fd990404b3661d5fec570d33ecdb72e2df80b93d41e7711ea78174c220732507
+local               my-vol
+local               my-vol1
+local               myvol
+
+## Create another docker volume named "testvol" :
+  
+  Command :
+  sudo docker volume create testvol
+
+## Remove docker volume "testvol" :
+
+  Command :
+  sudo docker volume rm testvol
+  
+  
+ ** Docker Linking:
+ 
+## Run a container in detached mode with name "db" from image "training/postgres" :
+
+  Command :
+  sudo docker run -d -it --name db training/postgres /bin/bash
+
+## Run another container in detached mode with name "web" from image "training/webapp", link container "db" with alias "mydb" to this container 
+   and finally pass an inline command "python app.py" while running container. ::
+   
+   Command :
+    sudo docker run -d --name web --link db1:mydb training/webapp python app.py
+
+## Take a bash terminal in "web" container.:
+
+  Command :
+    sudo docker exec -it 2bc3443a2e74 /bin/bash
+
+## Test container linking by doing a ping to "mydb":
+
+   Command :
+    ping mydb
+
+
+
